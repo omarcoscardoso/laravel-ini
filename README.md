@@ -15,7 +15,7 @@ Pequeno projeto para facilitar o desenvolvimento inicial com Laravel usando dock
 ## 🔨 Funcionalidades
 
 - `Laravel`: Escolha a versão do Laravel que deseja usar
-- `MySQL`: Já temos uma instância para bancod e dados
+- `MySQL`: Já temos uma instância para banco de dados
 - `Docker`: Sem comentários :-)
 
 ## Composer Install
