@@ -1,0 +1,48 @@
+version: '3.7'
+
+services: 
+
+  laravel:
+    build: 
+      context: ./laravel
+      dockerfile: Dockerfile
+    image: cardoso/laravel:dev
+    container_name: laravel
+    networks: 
+      - laranet
+    volumes:
+      - type: bind 
+        source: ./www
+        target: /var/www
+    tty: true
+
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: cardoso/nginx:dev
+    container_name: nginx
+    networks: 
+      - laranet
+    ports: 
+      - "8080:80"
+    depends_on: 
+       - db
+
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes: 
+      - ./mysql:/var/lib/mysql
+    environment: 
+      - MYSQL_DATABASE=laravel
+      - MYSQL_ROOT_PASSWORD=root
+    networks: 
+      - laranet
+
+networks: 
+  laranet:
+    driver: bridge      
