@@ -30,7 +30,7 @@ services:
        - db
 
   db:
-    image: mysql:5.7
+    image: mysql:8.1
     command: --innodb-use-native-aio=0
     container_name: db
     restart: always
@@ -43,6 +43,14 @@ services:
     networks: 
       - laranet
 
+  adminer:
+    image: adminer
+    restart: always
+    networks: 
+      - laranet
+    ports:
+      - 8088:8080
+
 networks: 
   laranet:
-    driver: bridge      
+    driver: bridge
